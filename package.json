@@ -1,0 +1,22 @@
+{
+  "name": "rokid-openclaw-bridge",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "openclaw": {
+    "id": "rokid-openclaw-bridge",
+    "extensions": [
+      "src/index.ts"
+    ]
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.2.19"
+  },
+  "dependencies": {
+    "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.10",
+    "typescript": "^5.4.0"
+  }
+}

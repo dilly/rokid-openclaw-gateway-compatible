@@ -1,0 +1,20 @@
+{
+  "id": "rokid-openclaw-bridge",
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "linkCode": {
+        "type": "string",
+        "default": "",
+        "description": "Link code for WebSocket authentication"
+      },
+      "linkSecret": {
+        "type": "string",
+        "default": "",
+        "description": "Link secret for WebSocket authentication"
+      }
+    },
+    "required": ["linkCode", "linkSecret"],
+    "additionalProperties": false
+  }
+}
