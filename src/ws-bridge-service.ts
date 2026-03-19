@@ -12,7 +12,7 @@ import {
   setGatewayLogger,
   GatewayError,
   type GatewayConfig,
-} from "./gateway-client.js";
+} from "./gateway-client";
 
 export interface WsBridgeConfig {
   wsUrl: string;
