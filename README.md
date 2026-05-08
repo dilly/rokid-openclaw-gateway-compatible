@@ -28,7 +28,6 @@ openclaw 接入 Rokid glasses 插件，兼容历史版本 openclaw。
    {
      "plugins": {
        "allow": [
-         "memory-core",
          "rokid-openclaw-bridge"
        ],
        "entries": {
