@@ -28,11 +28,18 @@ export default function register(api: any) {
   };
 
   logger.info(`[rokid-openclaw-bridge] Plugin registered.`);
+  logger.info(
+    `[rokid-openclaw-bridge] api keys: ${Object.keys(api ?? {}).join(",")}`
+  );
 
   if (typeof api.registerChannel === "function") {
     const channelPlugin = buildChannelPlugin(logger);
     api.registerChannel({ plugin: channelPlugin });
     logger.info(`[rokid-openclaw-bridge] Channel plugin registered for onboarding.`);
+  } else {
+    logger.warn(
+      `[rokid-openclaw-bridge] api.registerChannel is NOT a function (typeof=${typeof api.registerChannel}); channel not registered.`
+    );
   }
 }
 
@@ -55,10 +62,23 @@ function buildChannelPlugin(logger: any) {
 
     config: {
       listAccountIds: (_cfg: any) => {
-        const linkCode = _cfg?.plugins?.entries?.[CHANNEL_ID]?.config?.linkCode;
-        return linkCode ? [linkCode] : [];
+        const accounts = _cfg?.channels?.[CHANNEL_ID]?.accounts ?? {};
+        const ids = Object.keys(accounts);
+        logger.info(
+          `[rokid-openclaw-bridge] listAccountIds called -> ids=${JSON.stringify(ids)}`
+        );
+        return ids;
       },
-      resolveAccount: (_cfg: any, accountId?: string | null) => ({ accountId }),
+      resolveAccount: (_cfg: any, accountId?: string | null) => {
+        const acc =
+          accountId != null
+            ? _cfg?.channels?.[CHANNEL_ID]?.accounts?.[accountId]
+            : undefined;
+        logger.info(
+          `[rokid-openclaw-bridge] resolveAccount called -> accountId=${accountId ?? "(none)"} found=${Boolean(acc)}`
+        );
+        return { accountId, config: acc };
+      },
     },
 
     onboarding: {
@@ -119,6 +139,9 @@ function buildChannelPlugin(logger: any) {
 
     gateway: {
       startAccount: async (ctx: any) => {
+        logger.info(
+          `[rokid-openclaw-bridge] startAccount INVOKED -> accountId=${ctx?.account?.accountId ?? "(none)"}`
+        );
         const { account, cfg, abortSignal, log, channelRuntime } = ctx;
         const pluginConfig = cfg?.plugins?.entries?.[CHANNEL_ID]?.config ?? {};
         const accountConfig = account.config ?? {};

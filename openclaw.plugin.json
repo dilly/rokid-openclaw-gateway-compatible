@@ -1,7 +1,14 @@
 {
   "id": "rokid-openclaw-bridge",
+  "activation": {
+    "onStartup": false
+  },
+  "channels": [
+    "rokid-openclaw-bridge"
+  ],
   "configSchema": {
     "type": "object",
+    "additionalProperties": false,
     "properties": {
       "linkCode": {
         "type": "string",
@@ -13,8 +20,44 @@
         "default": "",
         "description": "Link secret for WebSocket authentication"
       }
-    },
-    "required": ["linkCode", "linkSecret"],
-    "additionalProperties": false
+    }
+  },
+  "channelConfigs": {
+    "rokid-openclaw-bridge": {
+      "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "accounts": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "linkCode": {
+                  "type": "string",
+                  "description": "Link code for WebSocket authentication"
+                },
+                "linkSecret": {
+                  "type": "string",
+                  "description": "Link secret for WebSocket authentication"
+                }
+              },
+              "required": ["linkCode", "linkSecret"]
+            }
+          }
+        }
+      }
+    }
   }
 }
