@@ -73,7 +73,3 @@ openclaw 接入 Rokid glasses 插件，兼容历史版本 openclaw。
 | --- | --- | --- |
 | `channels.rokid-openclaw-bridge.accounts.<id>.linkCode` | 是 | 设备配对码（device link code） |
 | `channels.rokid-openclaw-bridge.accounts.<id>.linkSecret` | 是 | 设备配对密钥（device link secret） |
-
-#### 升级提示（旧版本用户）
-
-旧版本将配置放在 `plugins.entries.rokid-openclaw-bridge.config` 下；新版本必须迁移到顶层 `channels.rokid-openclaw-bridge.accounts.<accountId>` 结构，否则插件不会启动。
