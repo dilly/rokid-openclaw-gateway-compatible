@@ -1,0 +1,30 @@
+name: rokid_openclaw_bridge
+label: Rokid OpenClaw Bridge
+kind: platform
+version: 1.0.0
+description: >
+  Hermes Agent gateway adapter for the Rokid OpenClaw WebSocket bridge.
+  Relays Rokid link-code WebSocket messages into Hermes messaging sessions.
+author: Rokid
+requires_env:
+  - name: ROKID_OPENCLAW_LINK_CODE
+    description: "Rokid device link code"
+    prompt: "Rokid link code"
+    password: false
+  - name: ROKID_OPENCLAW_LINK_SECRET
+    description: "Rokid device link secret"
+    prompt: "Rokid link secret"
+    password: true
+optional_env:
+  - name: ROKID_OPENCLAW_WS_URL
+    description: "Rokid bridge WebSocket URL"
+    prompt: "Rokid WebSocket URL"
+    password: false
+  - name: ROKID_OPENCLAW_ALLOWED_USERS
+    description: "Comma-separated Rokid chat/session IDs allowed to talk to Hermes"
+    prompt: "Allowed Rokid sessions"
+    password: false
+  - name: ROKID_OPENCLAW_ALLOW_ALL_USERS
+    description: "Allow all Rokid sessions"
+    prompt: "Allow all Rokid sessions"
+    password: false
